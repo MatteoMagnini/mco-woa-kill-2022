@@ -9,31 +9,25 @@
 \documentclass[presentation]{beamer}\mode<presentation>{\usetheme{AMSBolognaFC}}
 %\documentclass[handout]{beamer}\mode<handout>{\usetheme{AMSBolognaFC}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{wasysym}
-\usepackage[yyyymmdd]{datetime}
-\renewcommand{\dateseparator}{}
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
-% version
-\newcommand{\templatemajor}{1}
-\newcommand{\templateminor}{4}
-\newcommand{\templatepatch}{20220217}
-\newcommand{\templateversion}{\templatemajor.\templateminor.\templatepatch}
+\usepackage{mco-woa-kill-2022}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title[AMS Bologna FC Beamer Style]
-{AMS Bologna FC Beamer Style}
+\title[\killshort]
+{\killshort: \killlong}
 %
-\subtitle[AMS Series Templates]
-{AMS Series Templates}
+%\subtitle[AMS Series Templates]
+%{AMS Series Templates}
 %
-\author[\sspeaker{Omicini} \and Else]
-{\speaker{Andrea Omicini} \and Nobody Else\\\href{mailto:andrea.omicini@unibo.it}{andrea.omicini@unibo.it} \and \href{mailto:nobody.else@unibo.it}{nobody.else@unibo.it}}
+\author[\sspeaker{Magnini et al.} ]
+{\speaker{Matteo Magnini}$^{*}$ \and Giovanni Ciatto$^{*}$ \and Andrea Omicini$^{*}$}
 %
 \institute[DISI, Univ.\ Bologna]
-{Dipartimento di Informatica -- Scienza e Ingegneria (DISI)\\\textsc{Alma Mater Studiorum} -- Universit{\`a} di Bologna}
+{
+    $^{*}$Dipartimento di Informatica -- Scienza e Ingegneria (DISI)\\\textsc{Alma Mater Studiorum} -- Universit{\`a} di Bologna
+    \\
+    \{\speaker{matteo.magnini}, giovanni.ciatto, andrea.omicini\}@unibo.it % emph the presenting author's email
+}
 %
-\date[v.\ \templateversion]{version \templateversion}
+\date[WOA 2022]{WOA 2022:\\Workshop “From Objects to Agents”\\September 1–2, 2022, Genova, Italy}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -52,321 +46,335 @@
 %%/////////
 
 %===============================================================================
-\section{Premises}
+\section{Premises on \skilong}
 %===============================================================================
 
 %/////////
-\begin{frame}[c]{Academic Presentations}
-%
-\begin{itemize}
-	\item technical presentations are common in the academic environment
-	\item \alert{\LaTeX{}}\footnote{\uurl{http://latex.org}} is typically used for scientific literature
-	\begin{itemize}
-		\item for better formulas, bibliography, typography, \ldots
-	\end{itemize}
-	\item so, \LaTeX{} is the most typical \emph{toolbox} for scientific presentations
-	\begin{itemize}
-		\item which easily translates into teaching presentations, too
-	\end{itemize}
-\end{itemize}
-%
-\end{frame}
-%/////////
+\begin{frame}[allowframebreaks]{\skilong}
+    
+    \begin{block}{Definition \ccite{surveyNeuroSymb,surveyXie,surveyCalegariCO20}}
+        \skilong{} (\skishort) can be defined as:
+        \begin{displayquote}\itshape
+            any \emph{algorithmic} procedure affecting how \alert{sub-symbolic predictors} draw their inferences in such a way that predictions are either \emph{computed} as a function of, or made \emph{consistent} with, some \emph{given} \alert{symbolic knowledge}.
+        \end{displayquote}
+    \end{block}
+    
+    \framebreak
+    
+    \begin{block}{Symbolic knowledge}
+        A symbolic representation consists of: \ccite{sub-symbolic-vs-symbolic}
+        %
+        \begin{enumerate}
+            \item a set of symbols;
+            \item\label{item:symbolic-combination} a set of grammatical rules governing the combining of symbols; 
+            \item\label{item:symbolic-assignment} elementary symbols and any admissible combination of them can be assigned with meaning.
+            %
+            \begin{itemize}
+                \item[$\Rightarrow$] Symbolic knowledge is both human and machine interpretable,
+                \item first order logic (FOL) is an example of symbolic representation.
+            \end{itemize}
+        \end{enumerate}
+    \end{block}
+    
+    \framebreak
+    
+    \begin{block}{Sub-symbolic predictors}
+        \begin{itemize}
+            \item deep neural networks (DNN);
+            \begin{itemize}
+                \item convolutional neural networks (CNN),
+                \item recurrent neural networks (RNN);
+            \end{itemize}
+            \item kernel machines;
+            \item basically everything that is sub-symbolic (models consisting of vectors, tensors, etc. of real numbers with no meaning for a human).
+        \end{itemize}
+    \end{block}
+    
+    \framebreak
+    
+    \begin{figure}
+        \centering
+        \subfloat{\includegraphics[width=0.4\textwidth]{figures/nn-iris}}
+        %
+        \qquad
+        %
+        \centering
+        \subfloat{\includegraphics[width=0.4\textwidth]{figures/decision-tree-iris}}
+    \end{figure}
+    
+    \framebreak
+    
+    Set of propositional logic rules built from the previous decision tree:
+    
+    \begin{equation*}
+        \begin{aligned}
+            \pred{iris}&(\var{SepalLenght}, \var{SepalWidth}, \var{PetalLenght}, \var{PetalWidth}, \const{setosa})\text{:-}\\
+            &\var{PetalWidth} <= 0.6.\\
+            \pred{iris}&(\var{SepalLenght}, \var{SepalWidth}, \var{PetalLenght}, \var{PetalWidth}, \const{versicolor}) \text{:-}\\
+            &\var{PetalWidth} > 0.6, \var{PetalWidth} <= 1.7, \var{PetalLenght} <= 4.9.\\
+            \pred{iris}&(\var{SepalLenght}, \var{SepalWidth}, \var{PetalLenght}, \var{PetalWidth}, \const{virginica}) \text{:-}\\
+            &\var{PetalWidth} > 0.6, \var{PetalWidth} <= 1.5, \var{PetalLenght} > 4.9.\\
+            \pred{iris}&(\var{SepalLenght}, \var{SepalWidth}, \var{PetalLenght}, \var{PetalWidth}, \const{versicolor}) \text{:-}\\
+            &\var{PetalWidth} > 1.5, \var{PetalWidth} <= 1.7, \var{PetalLenght} > 4.9.\\
+            \pred{iris}&(\var{SepalLenght}, \var{SepalWidth}, \var{PetalLenght}, \var{PetalWidth}, \const{virginica}) \text{:-}\\
+            &\var{PetalWidth} > 1.7.\\
+        \end{aligned}
+    \end{equation*}
 
-%/////////
-\begin{frame}[c]{Beamer}
-%
-\begin{itemize}
-	\item \alert{Beamer} is a \LaTeX{} document class for creating presentation \emph{slides}, with a wide range of \emph{templates} and a set of features for making \emph{slideshow effects}
-	\begin{description}
-		\item[repo] \uurl{https://github.com/josephwright/beamer}
-		\item[CTAN] \uurl{https://ctan.org/pkg/beamer}
-	\end{description}
-	\item even though other styles for \LaTeX{} presentations exist, Beamer is by far the best way today
-\end{itemize}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c]{AMS}
-%
-\begin{description}
-	\item[AMS] Alma Mater Studiorum--Università di Bologna
-	\item[Cesena] Campus of Cesena
-	\begin{itemize}
-		\item hence the AMS Cesena Campus logo on the bottom-left corner
-	\end{itemize}
-\end{description}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c]{Aim}
-%
-\begin{itemize}
-	\item many occasions for presentation
-	\item many different people in the group
-	\item a common reference could be useful
-	\item hence, this style
-	\item based on random Beamer styles, and using some references for the colours
-\end{itemize}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c]{Who}
-%
-\begin{itemize}
-	\item mostly, myself
-	\item and, collaborators of mine---the \alert{good} ones \textcolor{bolognafcred}{\smiley{}}
-	\item everybody else, \emph{be my guest!}
-\end{itemize}
-%
+     \framebreak
+    
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{figures/iris-plot.pdf}
+    \end{figure}
+    
+    \framebreak
+    
+    \begin{block}{Why?}
+        There are several benefits:
+        %
+        \begin{itemize}
+            %
+            \item prevent the predictor to become a black-box\alert{!};
+            %
+            \item reduce learning time;
+            %
+            \item reduce the data size needed for training;
+            %
+            \item improve predictor's accuracy;
+            %
+            \item build a predictor that behave as a logic engine.
+        \end{itemize}
+    \end{block}
+    
+    \framebreak
+    
+    Explainability can be achieved \ccite{darpa2016-xai}:
+    %
+    \begin{block}{Post-hoc explanation}
+        \begin{itemize}
+            \item applying an algorithm of symbolic knowledge extraction on a trained predictor;
+            %
+            \item output $\rightarrow$ logic rules that describe the predictor's behaviour.
+            %
+        \end{itemize}    
+    \end{block}
+    
+    \begin{block}{By design}
+        \begin{itemize}
+            \item constraining the behaviour of predictors that are natively black-boxes with symbolic knowledge;
+            %
+            \item structuring the predictor's architecture with symbolic knowledge;
+            %
+            \item output $\rightarrow$ a predictor that does not violate the prior knowledge.
+        \end{itemize}
+    \end{block}
+    
+    %\end{frame}
+    %/////////
+    \framebreak
+    %/////////
+    %\begin{frame}[allowframebreaks]{Macro techniques}  
+    
+    \begin{block}{How?}
+        There exist three major ways to perform knowledge injection on sub-symbolic predictors:
+        %
+        \begin{itemize}
+            \item \alert{constraining}, a cost factor proportional to the violation of the knowledge is introduced during learning;
+            \item \alert{structuring}, the architecture of the predictor is built in such a way to mimic the knowledge;
+            \item \alert{embedding}, the symbolic knowledge is embedded into a tensor form and it is given in input as training data to the predictor.
+        \end{itemize} 
+    \end{block}
+    
+    \comment{
+        \framebreak
+        
+        \begin{block}{Constraining}
+            \begin{itemize}
+                \item Knowledge cost factor is introduced in the loss function;
+                %
+                \item for NN the cost affects backpropagation \ccite{backpropagation} during training.
+                %
+                \begin{itemize}
+                    \item[$\Rightarrow$] Predictor does not violate the prior knowledge (to a certain extent).
+                \end{itemize} 
+            \end{itemize}
+        \end{block}
+        
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.5\textwidth]{figures/ski-constraining}
+        \end{figure}
+        
+        \framebreak
+        
+        %\begin{figure}
+        %    \centering
+        %    \includegraphics[width=0.8\textwidth]{figures/nn-backprop.png}
+        %\end{figure}
+        
+        \framebreak
+        
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{figures/nn-gradient-descent.png}
+        \end{figure}
+        
+        \framebreak
+        
+        \begin{block}{Structuring}
+            \begin{itemize}
+                \item Inner architecture is shaped to be able to ``mimic'' the knowledge;
+                %
+                \item for NN this means \emph{ad-hoc} layers.
+                %
+                \begin{itemize}
+                    \item[$\Rightarrow$] Predictor directly exploits knowledge when needed.
+                \end{itemize} 
+            \end{itemize}
+        \end{block}
+        
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.6\textwidth]{figures/ski-structuring}
+        \end{figure}
+        
+        \framebreak
+        
+        \begin{itemize}
+            \item We need to define a mapping from crispy logic rules into fuzzy continuous interpretations;
+            %
+            \item then we need to map the interpretations into ad-hoc neurons/layers.
+        \end{itemize}
+        
+        \begin{minipage}{0.45\textwidth}
+            \begin{equation*}
+                \begin{aligned}
+                    \var{A}&\leftarrow\var{B}\wedge\var{C}\wedge\neg\var{D}.\\
+                    \var{A}&\leftarrow\var{E}\wedge\var{F}.\\
+                    \var{B}&\leftarrow\const{true}.\\
+                \end{aligned}    
+            \end{equation*}
+        \end{minipage}
+        %
+        \begin{minipage}{0.45\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[height=0.5\textheight]{figures/structuring-example}
+            \end{figure}
+        \end{minipage}
+        
+        \framebreak
+        
+        \begin{block}{Embedding}
+            
+            \begin{itemize}
+                \item Symbolic knowledge is embedded into a tensor form;
+                %
+                \item this is used as predictor's input data (alone or with a ``standard'' dataset).
+                %
+                \begin{itemize}
+                    \item[$\Rightarrow$] Predictor's aim is manifold in most cases.
+                \end{itemize} 
+            \end{itemize}
+            
+        \end{block}
+        
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.6\textwidth]{figures/ski-embedding}
+        \end{figure}
+        
+        \framebreak
+        %
+        \begin{itemize}
+            \item Knowledge graph embedding \ccite{kge-survey};
+            %
+            \item entities and relations are embedded into continuos vector spaces;
+            %
+            \item scoring function $f_{r}(h,t)$ defined on each fact $(h, r, t)$ to measure its plausibility;
+        \end{itemize}
+        %
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{figures/kge-space.png}
+        \end{figure}
+        
+        \framebreak
+        
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{figures/kge-nn-1.png}
+        \end{figure}
+        
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{figures/kge-nn-2.png}
+        \end{figure}
+    }
+    
 \end{frame}
 %/////////
 
 %===============================================================================
-\section{Use}
+\section{\killshort{}: \killlong}
 %===============================================================================
 
 %/////////
-\begin{frame}[c,allowframebreaks]{Files}
-%
-\begin{block}{Style files}
-The files
-\begin{itemize}
-	\item \texttt{beamercolorthemebolognafc.sty}
-	\item \texttt{beamerthemeAMSBolognaFC.sty}
-	\item \texttt{almacesena-background.pdf}
-\end{itemize}
-should be placed either in the local folder with the main \texttt{.tex} file, or, in your Beamer system directory, e.g.
-\begin{itemize}
-	\item \texttt{/Users/\{username\}/Library/texmf/tex/latex/local/beamer/}
-\end{itemize}
-\end{block}
-%
-\begin{block}{BST files}
-The files
-\begin{itemize}
-	\item \texttt{apalike-AMS.bst}
-\end{itemize}
-should be placed either in the local folder with the main \texttt{.tex} file, or, in your Beamer system directory, e.g.
-\begin{itemize}
-	\item \texttt{/Users/\{username\}/Library/texmf/bibtex/bst/local/}
-\end{itemize}
-\end{block}
-%
+\begin{frame}[allowframebreaks]{Algorithm}
+    \begin{block}{\killshort: \killlong}
+        %
+        A general SKI algorithm that does not impose constrains on the sub-symbolic predictor to enrich, except being a neural network.
+        %
+        \begin{itemize}
+            %
+            \item aim $\rightarrow$ enrich;
+            %
+            \item predictor $\rightarrow$ neural network;
+            %
+            \item how $\rightarrow$ constraining;
+            %
+            \item logic $\rightarrow$ stratified Datalog with negation.
+            %    
+        \end{itemize}
+    \end{block}
+    %
+    Public implementation on \psyki{} \ccite{psyki}.
+    
+    \framebreak
+    
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/lambda-layer.pdf}
+    \end{figure}
+    
+    \framebreak
+    
+    \input{tables/logic-formulae.tex}
+    
+    \framebreak
+    
+    \begin{equation*}
+        \centering
+        \begin{aligned}
+            &Y' = Y\ x\ (\textbf{1} + \pred{cost}(X,Y))\\
+            &\pred{cost}(X,Y) = \eta(\pred{p}(X) - (\textbf{1} - Y))\quad\text{(because 0 means true)}\\
+            \cline{1-2}
+            X &= [1.5, 0.2, 5.0, 3.4]\quad (\const{setosa})\\
+            Y &= [0.1, 0.9, 0]\quad (\const{setosa},\const{versicolor},\const{virginica})\\
+            Y' &= [0.1, 0.9, 0]\ x\ (\textbf{1} + \pred{cost}([1.5, 0.2, 5.0, 3.4],[0.1, 0.9, 0]))\\
+            \pred{cost} &= \eta(\pred{iris}([1.5, 0.2, 5.0, 3.4]) - [0.9, 0.1, 1])\\
+            \pred{cost} &= \eta([0, 0.9, 0] - [0.9, 0.1, 1])\\
+            \pred{cost} &= [0, 0.8, 0]\\
+            Y' &= [0.1, 0.9, 0]\ x\ (\textbf{1} + [0, 0.8, 0])\\
+            Y' &= [0.1, 1.62, 0]\\
+        \end{aligned}
+    \end{equation*}
+    
+    \framebreak
+    
+    
 \end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile]{Declaration}
-%
-\begin{block}{\texttt{\textbackslash{}documentclass}}
-Your main Beamer \texttt{.tex} file should open with the declaration
-%
-\begin{verbatim}
-    \documentclass[presentation]{beamer}
-        \mode<presentation>{\usetheme{AMSBolognaFC}}
-\end{verbatim}
-%
-so as to use the AMS Bologna FC Beamer style 
-\end{block}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile]{Bibliography Style}
-%
-\begin{block}{\texttt{apalike-AMS}}
-Your main Beamer \texttt{.tex} file should include the declaration
-\begin{verbatim}
-    \bibliographystyle{apalike-AMS}
-\end{verbatim}	
-so as to use the AMS Bologna FC \BibTeX{} style 
-\end{block}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile]{Template}
-%
-\begin{block}{\texttt{AMSBolognaFC-template.tex}}
-This template's sources can be used as a simple example of how yo use this Beamer style
-\end{block}
-%
-\end{frame}
-%/////////
-
-
-%===============================================================================
-\section{Style}
-%===============================================================================
-
-%/////////
-\begin{frame}[c,allowframebreaks]{Colours for AMS Bologna FC}
-%
-\begin{exampleblock}{\texttt{\textcolor{bolognafcblue}{bolognafcblue}}}
-	\begin{description}
-		\item[HEX] \texttt{\#1A2F48}
-		\item[RGB] \texttt{26,47,72}
-	\end{description}
-\end{exampleblock}
-\begin{exampleblock}{\texttt{\textcolor{bolognafcred}{bolognafcred}}}
-	\begin{description}
-		\item[HEX] \texttt{\#A21C26}
-		\item[RGB] \texttt{162,28,38}
-	\end{description}
-\end{exampleblock}
-\framebreak
-\begin{block}{\texttt{\textcolor{bolognafcwhite}{bolognafcwhite}}}
-	\begin{description}
-		\item[HEX] \texttt{\#FFFFFF}
-		\item[RGB] \texttt{255,255,255}
-	\end{description}
-\end{block}
-\begin{alertblock}{\texttt{\textcolor{bolognafcsilver}{bolognafcsilver}}}
-	\begin{description}
-		\item[HEX] \texttt{\#ECECEC}
-		\item[RGB] \texttt{236,236,236}
-	\end{description}
-\end{alertblock}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile]{Blocks}
-%
-\begin{block}{This is a \texttt{block} environment}
-\begin{verbatim}
-\begin{block}
-...
-\end{block}
-\end{verbatim}
-\end{block}
-%
-\begin{exampleblock}{This is an \texttt{exampleblock} environment}
-\begin{verbatim}
-\begin{exampleblock}
-...
-\end{exampleblock}
-\end{verbatim}
-\end{exampleblock}
-%
-\begin{alertblock}{This is an \texttt{alertblock} environment}
-\begin{verbatim}
-\begin{alertblock}
-...
-\end{alertblock}
-\end{verbatim}
-\end{alertblock}
-%
-\end{frame}
-%/////////
-
-%===============================================================================
-\section{New Commands}
-%===============================================================================
-
-%/////////
-\begin{frame}[c,allowframebreaks,fragile]{Citations}
-%
-\begin{alertblock}{\texttt{\textbackslash{}ccite} command---e.g., \ccite{bibtex-patashnik88}}
-\begin{verbatim}
-\ccite{bibtex-patashnik88}
-\end{verbatim}
-\begin{itemize}
-	\item to be used instead of standard \texttt{\textbackslash{}cite} command
-	\item prints as \ccite{bibtex-patashnik88}
-	\item can be used as a note\ccite{bibtex-patashnik88}, with no space before
-\end{itemize}
-\end{alertblock}
-%
-\begin{exampleblock}{\texttt{\textbackslash{}cccite} command---e.g., \cccite{bibtex-patashnik88}}
-\begin{verbatim}
-\cccite{bibtex-patashnik88}
-\end{verbatim}
-\begin{itemize}
-	\item a lighter version of the \texttt{\textbackslash{}ccite} command over non-dark, non-light backgrounds
-	\begin{itemize}
-		\item as here above in \texttt{examplebox} header
-	\end{itemize}
-	\item can be used as a note with no space before, in the same way as \texttt{\textbackslash{}ccite}
-\end{itemize}
-\end{exampleblock}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile]{URLs}
-%
-\begin{block}{\texttt{\textbackslash{}uurl} command}
-\begin{itemize}
-	\item to be used instead of standard \texttt{\textbackslash{}url} command
-	\item[e.g.] \verb|\uurl{http://apice.unibo.it}| prints as \uurl{http://apice.unibo.it}
-\end{itemize}
-\end{block}
-%
-\begin{block}{\texttt{\textbackslash{}uuurl} command---e.g., \uuurl{http://apice.unibo.it}}
-\begin{itemize}
-	\item to be used instead of standard \texttt{\textbackslash{}url} command over dark backgrounds
-	\item[e.g.] see \verb|\uuurl{http://apice.unibo.it}| above in this \texttt{block} header
-\end{itemize}
-\end{block}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile]{Alert}
-%
-\begin{block}{\texttt{\textbackslash{}aalert} command---e.g., \aalert{alerted text}}
-\begin{itemize}
-	\item to be used instead of standard \texttt{\textbackslash{}alert} command over dark backgrounds
-	\item[e.g.] see \verb|\aalert{alerted text}| above in this \texttt{block} header
-\end{itemize}
-\end{block}
-%
-\end{frame}
-%/////////
-
-%/////////
-\begin{frame}[c,fragile,allowframebreaks]{Speaker(s) \emph{vs.} Authors}
-%
-\begin{exampleblock}{\texttt{\textbackslash{}speaker} command--e.g., \speaker{Diego Zorro}}
-\begin{itemize}
-	\item to be used within \texttt{\textbackslash{}author} standard \BibTeX{} command to single out the actual speaker among the authors
-	\item[e.g.] as in
-\begin{verbatim}
-	\author[Garcia \and Zorro]
-	{Sarg Garcia \and \speaker{Diego Zorro}}
-\end{verbatim}
-	\item and in the author specification of this template
-\end{itemize}
-\end{exampleblock}
-%
-\begin{block}{\texttt{\textbackslash{}sspeaker} command--e.g., \sspeaker{Diego Zorro}}
-\begin{itemize}
-	\item to be used within \texttt{\textbackslash{}author} standard \BibTeX{} command to single out the actual speaker among the authors in the short form
-	\item[e.g.] as in
-\begin{verbatim}
-	\author[Garcia \and \sspeaker{Zorro}]
-	{Sarg Garcia \and \speaker{Diego Zorro}}
-\end{verbatim}
-	\item and in the author specification of this template
-\end{itemize}
-\end{block}
-
-\end{frame}
-%/////////
-
 
 %===============================================================================
 \section*{}
@@ -383,13 +391,13 @@ This template's sources can be used as a simple example of how yo use this Beame
 %%%%
 \setbeamertemplate{page number in head/foot}{}
 %/////////
-\begin{frame}[c,noframenumbering]{\refname}
-%\begin{frame}[t,allowframebreaks,noframenumbering]{\refname}
-%	\tiny
-	\scriptsize
-%	\footnotesize
-	\bibliographystyle{apalike-AMS}
-	\bibliography{mco-woa-kill-2022}
+\begin{frame}[c,allowframebreaks,noframenumbering]{\refname}
+    %\begin{frame}[t,allowframebreaks,noframenumbering]{\refname}
+    %	\tiny
+    \scriptsize
+    %	\footnotesize
+    \bibliographystyle{apalike-AMS}
+    \bibliography{mco-woa-kill-2022}
 \end{frame}
 %/////////
 
