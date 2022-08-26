@@ -403,7 +403,50 @@
 
 %/////////
 \begin{frame}[allowframebreaks]{Case study}
-    Empty page
+    
+     \begin{block}{PHDS: Poker Hand Data Set}
+        Each record represents one poker hand. 5 cards identified by 2 values: suit and rank.
+        %
+        Classes: 10.
+        %
+        Training set: 25.010. Test set: 1.000.000.
+    \end{block}
+    
+    \input{tables/poker-data}
+    
+    \framebreak
+    
+    Some injected rules.
+    \input{tables/poker-rules}
+    
+    \framebreak
+    
+    \begin{block}{Setup}
+        \begin{itemize}
+            \item neural network: 3-layers fully connected (128, 128, 10 neurons per layer respectively) with rectified linear unit (ReLU) as activation function, except for the last layer (softmax);
+            %
+            \item knowledge: see previous slides;
+            %
+            \item categorical cross-entropy as loss function
+            %
+            \item training: Adams as optimiser for 100 epochs (with early stop conditions);
+            %
+            \item experiment repeated 30 times to have a statistic significant population.
+        \end{itemize}
+    \end{block}
+    %
+    
+    \framebreak
+    
+    \input{tables/test-stats}
+    
+     \framebreak
+    
+    \begin{figure}
+        \centering
+        \includegraphics[width=.8\linewidth]{figures/class-accuracy-distributions.pdf}
+    \end{figure}
+    
 \end{frame}
 
 %===============================================================================
