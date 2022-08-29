@@ -353,42 +353,61 @@
     \input{tables/logic-formulae.tex}
     
     \framebreak
-    
+
+    \begin{block}{Cost function}
+        Whenever the neural network wrongly predicts a class and violates the prior knowledge a cost proportional to the violation is added.
+        %
+        In this way the output of the network differs more from the expected one and this affects the back propagation step.
+    \end{block}
+
     \begin{equation*}
         \centering
         \begin{aligned}
             &Y' = f(Y, \pred{cost})\\
             &f = Y\ x\ (\textbf{1} + \pred{cost})\\
-            &\pred{cost}(X,Y) = \eta(\pred{p}(X) - (\textbf{1} - Y))\quad\text{(because 0 means true)}\\
-            \cline{1-2}
-            X &= [5.0, 3.4, 1.5, 0.2]\quad (\const{setosa})\\
-            Y &= [0.1, 0.9, 0]\quad (\const{setosa},\const{versicolor},\const{virginica})\\
-            Y' &= [0.1, 0.9, 0]\ x\ (\textbf{1} + \pred{cost}([5.0, 3.4, 1.5, 0.2],[0.1, 0.9, 0]))\\
-            \pred{cost} &= \eta(\pred{iris}([5.0, 3.4, 1.5, 0.2]) - [0.9, 0.1, 1])\\
-            \pred{cost} &= \eta([0, 0.9, 0] - [0.9, 0.1, 1])\\
-            \pred{cost} &= [0, 0.8, 0]\\
-            Y' &= [0.1, 0.9, 0]\ x\ (\textbf{1} + [0, 0.8, 0])\\
-            Y' &= [0.1, 1.62, 0]\\
-        \end{aligned}
-    \end{equation*}
-    
-    \framebreak
-    
-    \begin{equation*}
-        \centering
-        \begin{aligned}
-            X &= [5.0, 3.4, 1.5, 0.2]\quad (\const{setosa})\\
-            \pred{iris}&(\var{SepalLenght}, \var{SepalWidth}, \var{PetalLenght}, \var{PetalWidth}, \const{versicolor}) \text{:-}\\
-            &\var{PetalWidth} > 0.6, \var{PetalWidth} <= 1.7, \var{PetalLenght} <= 4.9.\\
-            \pred{iris}&(\const{5.0}, \const{3.4}, \const{1.5}, \const{0.2}, \const{versicolor}).\\
-            &= (0.2 > 0.6) \vee (0.2 \le 1.7) \vee (1.5 \le 4.9)\\
-            &= \eta(\pred{max}(\pred{max}(\eta(0.5 - 0.2 + 0.6), \eta(0.2 - 1.7)), \eta(1.5 - 4.9))))\\
-            &= \eta(\pred{max}(\pred{max}(0.9, 0), 0)))\\
-            &= 0.9
+            &\pred{cost}(X,Y) = \eta(\pred{p}(X) - (\textbf{1} - Y))\quad \text{(}\textbf{1} - Y\text{ because 0 means true)}\\
         \end{aligned}
     \end{equation*}
 
     \framebreak
+    
+    \comment{
+        \begin{equation*}
+            \centering
+            \begin{aligned}
+                &Y' = f(Y, \pred{cost})\\
+                &f = Y\ x\ (\textbf{1} + \pred{cost})\\
+                &\pred{cost}(X,Y) = \eta(\pred{p}(X) - (\textbf{1} - Y))\quad\text{(because 0 means true)}\\
+                \cline{1-2}
+                X &= [5.0, 3.4, 1.5, 0.2]\quad (\const{setosa})\\
+                Y &= [0.1, 0.9, 0]\quad (\const{setosa},\const{versicolor},\const{virginica})\\
+                Y' &= [0.1, 0.9, 0]\ x\ (\textbf{1} + \pred{cost}([5.0, 3.4, 1.5, 0.2],[0.1, 0.9, 0]))\\
+                \pred{cost} &= \eta(\pred{iris}([5.0, 3.4, 1.5, 0.2]) - [0.9, 0.1, 1])\\
+                \pred{cost} &= \eta([0, 0.9, 0] - [0.9, 0.1, 1])\\
+                \pred{cost} &= [0, 0.8, 0]\\
+                Y' &= [0.1, 0.9, 0]\ x\ (\textbf{1} + [0, 0.8, 0])\\
+                Y' &= [0.1, 1.62, 0]\\
+            \end{aligned}
+        \end{equation*}
+    
+        \framebreak
+    
+        \begin{equation*}
+            \centering
+            \begin{aligned}
+                X &= [5.0, 3.4, 1.5, 0.2]\quad (\const{setosa})\\
+                \pred{iris}&(\var{SepalLenght}, \var{SepalWidth}, \var{PetalLenght}, \var{PetalWidth}, \const{versicolor}) \text{:-}\\
+                &\var{PetalWidth} > 0.6, \var{PetalWidth} <= 1.7, \var{PetalLenght} <= 4.9.\\
+                \pred{iris}&(\const{5.0}, \const{3.4}, \const{1.5}, \const{0.2}, \const{versicolor}).\\
+                &= (0.2 > 0.6) \vee (0.2 \le 1.7) \vee (1.5 \le 4.9)\\
+                &= \eta(\pred{max}(\pred{max}(\eta(0.5 - 0.2 + 0.6), \eta(0.2 - 1.7)), \eta(1.5 - 4.9))))\\
+                &= \eta(\pred{max}(\pred{max}(0.9, 0), 0)))\\
+                &= 0.9
+            \end{aligned}
+        \end{equation*}
+    
+        \framebreak
+    }
     
     \begin{figure}
         \centering
@@ -448,6 +467,39 @@
     \end{figure}
     
 \end{frame}
+
+
+%===============================================================================
+\section{Discussion and future works}
+%===============================================================================
+
+\begin{frame}[allowframebreaks]{Discussion and future works}
+    
+    \begin{block}{Discussion}
+        \begin{itemize}
+            \item the case study shows that \killshort{} can be applied with success when the injected knowledge is correct;
+            %
+            \item predictions for less represented classes are not improved as much as for more frequent ones (this is very likely a common feature for all  SKI algorithms based on constraining).
+        \end{itemize}
+    \end{block}
+    %
+    
+    \framebreak
+    
+    \begin{block}{Future works}
+        \begin{itemize}
+            \item explore scenarios where the injected knowledge is not perfectly correct;
+            %
+            \item test the performances of \killshort{} inside the train-extract-fix-inject workflow.
+        \end{itemize}
+    \end{block}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{figures/ske-ski-workflow}
+    \end{figure}
+\end{frame}
+
 
 %===============================================================================
 \section*{}
